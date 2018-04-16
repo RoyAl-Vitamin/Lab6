@@ -33,6 +33,10 @@ public class Server implements Runnable {
             String line = null;
             while(true) {
                 line = in.readUTF(); // ожидаем пока клиент пришлет строку текста.
+                if ("exit".equalsIgnoreCase(line)) {
+                    out.flush();
+                    break;
+                }
                 System.out.println("The dumb client just sent me this line : " + line);
                 System.out.println("I'm sending it back...");
                 out.writeUTF(line); // отсылаем клиенту обратно ту самую строку текста.

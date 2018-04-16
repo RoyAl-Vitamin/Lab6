@@ -56,4 +56,9 @@ public class Config {
     public void setServerHost(String serverHost) {
         this.serverHost = serverHost;
     }
+
+    public void reloadConfig() {
+        config = null;
+        config = new Config();
+    }
 }

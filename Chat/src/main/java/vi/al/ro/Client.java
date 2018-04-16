@@ -6,24 +6,23 @@ import java.net.Socket;
 
 public class Client implements Runnable {
 
-    // здесь обязательно нужно указать порт к которому привязывается сервер.
-    private final int SERVER_PORT;// это IP-адрес компьютера, где исполняется наша серверная программа.
-
-    // Здесь указан адрес того самого компьютера где будет исполняться и клиент.
-    private final String ADDRESS;
+    // порт сервера
+    private final int SERVER_PORT;
+    // адрес сервера
+    private final String SERVER_ADDRESS;
 
     public Client() {
         Config config = Config.getInstance();
-        ADDRESS = config.getServerHost();
+        SERVER_ADDRESS = config.getServerHost();
         SERVER_PORT = config.getServerPort();
     }
 
     public void run() {
 
         try {
-            InetAddress ipAddress = InetAddress.getByName(ADDRESS); // создаем объект который отображает вышеописанный IP-адрес.
-            Socket socket = new Socket(ipAddress, SERVER_PORT); // создаем сокет используя IP-адрес и порт сервера.
-            System.out.println("Any of you heard of a socket with IP address " + ADDRESS + " and port " + SERVER_PORT + "?");
+            InetAddress ipServerAddress = InetAddress.getByName(SERVER_ADDRESS); // создаем объект который отображает вышеописанный IP-адрес.
+            Socket socket = new Socket(ipServerAddress, SERVER_PORT); // создаем сокет используя IP-адрес и порт сервера.
+            System.out.println("Any of you heard of a socket with IP address " + SERVER_ADDRESS + " and port " + SERVER_PORT + "?");
             System.out.println("Yes! I just got hold of the program.");
 
             // Берем входной и выходной потоки сокета, теперь можем получать и отсылать данные клиентом.
