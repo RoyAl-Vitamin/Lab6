@@ -2,7 +2,7 @@ package vi.al.ro;
 
 import java.io.*;
 import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.Socket;;
 
 public class Server implements Runnable {
 
@@ -37,12 +37,13 @@ public class Server implements Runnable {
                     out.flush();
                     break;
                 }
-                System.out.println("The dumb client just sent me this line : " + line);
-                System.out.println("I'm sending it back...");
+//                System.out.println("The dumb client just sent me this line : " + line);
+//                System.out.println(sdf.format(new Date()) + line);
+//                System.out.println("I'm sending it back...");
                 out.writeUTF(line); // отсылаем клиенту обратно ту самую строку текста.
                 out.flush(); // заставляем поток закончить передачу данных.
-                System.out.println("Waiting for the next line...");
-                System.out.println();
+//                System.out.println("Waiting for the next line...");
+//                System.out.println();
             }
         } catch(IOException e) {
             e.printStackTrace();

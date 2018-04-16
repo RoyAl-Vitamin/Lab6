@@ -1,4 +1,5 @@
 {
-  "serverPort" : 4535,
-  "serverHost" : "127.0.0.1"
+  "server_port" : 4535,
+  "client_host" : "127.0.0.1",
+  "client_port" : 4536
 }

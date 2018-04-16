@@ -8,8 +8,9 @@ public class Config {
 
     private static Config config = null;
 
-    private int serverPort;
-    private String serverHost;
+    private int serverPort; // Порт, где сидит сокет сервера
+    private String clientHost; // Хост, куда коннектится клиент
+    private int clientPort; // Порт, куда коннектится клиент
 
     private Config() {
         ClassLoader classLoader = Config.class.getClassLoader();
@@ -19,13 +20,17 @@ public class Config {
                 JsonParser.Event e = parser.next();
                 if (e == JsonParser.Event.KEY_NAME) {
                     switch (parser.getString()) {
-                        case "serverPort":
+                        case "server_port":
                             parser.next();
                             serverPort = parser.getInt();
                             break;
-                        case "serverHost":
+                        case "client_host":
                             parser.next();
-                            serverHost = parser.getString();
+                            clientHost = parser.getString();
+                            break;
+                        case "client_port":
+                            parser.next();
+                            clientPort = parser.getInt();
                             break;
                     }
                 }
@@ -49,12 +54,20 @@ public class Config {
         this.serverPort = serverPort;
     }
 
-    public String getServerHost() {
-        return serverHost;
+    public String getClientHost() {
+        return clientHost;
     }
 
-    public void setServerHost(String serverHost) {
-        this.serverHost = serverHost;
+    public void setClientHost(String clientHost) {
+        this.clientHost = clientHost;
+    }
+
+    public int getClientPort() {
+        return clientPort;
+    }
+
+    public void setClientPort(int clientPort) {
+        this.clientPort = clientPort;
     }
 
     public void reloadConfig() {

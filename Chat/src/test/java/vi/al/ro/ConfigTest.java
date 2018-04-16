@@ -17,7 +17,7 @@ public class ConfigTest {
 
     @Test
     public void testHostName() {
-        assertEquals(config.getServerHost(), "127.0.0.1");
+        assertEquals(config.getClientHost(), "127.0.0.1");
     }
 
     @Test
