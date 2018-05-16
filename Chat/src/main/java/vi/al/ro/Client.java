@@ -17,9 +17,15 @@ public class Client implements Runnable {
         Config config = Config.getInstance();
         SERVER_ADDRESS = config.getClientHost();
         SERVER_PORT = config.getClientPort();
+        System.out.println("CLIENT: SERVER_ADDRESS == " + SERVER_ADDRESS + " SERVER_PORT == " + SERVER_PORT);
     }
 
     public void run() {
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd HH:mm:ss -> ");
         try {
             InetAddress ipServerAddress = InetAddress.getByName(SERVER_ADDRESS); // создаем объект который отображает вышеописанный IP-адрес.
@@ -28,11 +34,11 @@ public class Client implements Runnable {
             System.out.println("Yes! I just got hold of the program.");
 
             // Берем входной и выходной потоки сокета, теперь можем получать и отсылать данные клиентом.
-            InputStream sin = socket.getInputStream();
+//            InputStream sin = socket.getInputStream();
             OutputStream sout = socket.getOutputStream();
 
             // Конвертируем потоки в другой тип, чтоб легче обрабатывать текстовые сообщения.
-            DataInputStream in = new DataInputStream(sin);
+//            DataInputStream in = new DataInputStream(sin);
             DataOutputStream out = new DataOutputStream(sout);
 
             // Создаем поток для чтения с клавиатуры.
@@ -49,11 +55,11 @@ public class Client implements Runnable {
                 if ("exit".equalsIgnoreCase(line)) {
                     break;
                 }
-                line = in.readUTF(); // ждем пока сервер отошлет строку текста.
+//                line = in.readUTF(); // ждем пока сервер отошлет строку текста.
 //                System.out.println("The server was very polite. It sent me this : " + line);
-                System.out.println(sdf.format(new Date()) + line);
+//                System.out.println(sdf.format(new Date()) + line);
 //                System.out.println("Looks like the server is pleased with us. Go ahead and enter more lines.");
-                System.out.println();
+//                System.out.println();
             }
         } catch (IOException e) {
             e.printStackTrace();

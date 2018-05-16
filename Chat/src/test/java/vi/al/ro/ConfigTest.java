@@ -22,7 +22,7 @@ public class ConfigTest {
 
     @Test
     public void testHostPort() {
-        assertEquals(config.getServerPort(), 4535);
+        assertEquals(config.getServerPort(), 9090);
     }
 
     @After

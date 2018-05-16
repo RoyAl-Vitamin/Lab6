@@ -20,13 +20,15 @@ public class Main {
             Config config = Config.getInstance();
 
             if (line.hasOption("P")) {
-                String sPort = line.getOptionValue("p");
+                String sPort = line.getOptionValue("P");
                 int port = Integer.parseInt(sPort);
+                System.out.println("Server port == " + port);
                 config.setServerPort(port);
             }
             if (line.hasOption("p")) {
                 String sPort = line.getOptionValue("p");
                 int port = Integer.parseInt(sPort);
+                System.out.println("Client port == " + port);
                 config.setClientPort(port);
             }
             if (line.hasOption("h")) {

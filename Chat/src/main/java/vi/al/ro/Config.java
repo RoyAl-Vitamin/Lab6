@@ -13,9 +13,9 @@ public class Config {
     private int clientPort; // Порт, куда коннектится клиент
 
     private Config() {
-        ClassLoader classLoader = Config.class.getClassLoader();
-        try (InputStream is = new FileInputStream(new File(classLoader.getResource("config.json").getFile()));
-            JsonParser parser = Json.createParser(is)) {
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream is = classLoader.getResourceAsStream("config.json");
+        try (JsonParser parser = Json.createParser(is)) {
             while (parser.hasNext()) {
                 JsonParser.Event e = parser.next();
                 if (e == JsonParser.Event.KEY_NAME) {
@@ -35,8 +35,12 @@ public class Config {
                     }
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

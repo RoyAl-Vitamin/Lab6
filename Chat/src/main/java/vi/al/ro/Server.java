@@ -11,6 +11,7 @@ public class Server implements Runnable {
     public Server() {
         Config config = Config.getInstance();
         PORT = config.getServerPort();
+        System.out.println("SERVER: PORT == " + PORT);
     }
 
     public void run() {
@@ -28,20 +29,21 @@ public class Server implements Runnable {
 
             // Конвертируем потоки в другой тип, чтоб легче обрабатывать текстовые сообщения.
             DataInputStream in = new DataInputStream(sin);
-            DataOutputStream out = new DataOutputStream(sout);
+//            DataOutputStream out = new DataOutputStream(sout);
 
             String line = null;
-            while(true) {
+            while (true) {
                 line = in.readUTF(); // ожидаем пока клиент пришлет строку текста.
                 if ("exit".equalsIgnoreCase(line)) {
-                    out.flush();
+//                    out.flush();
                     break;
                 }
+                System.out.println(line);
 //                System.out.println("The dumb client just sent me this line : " + line);
 //                System.out.println(sdf.format(new Date()) + line);
 //                System.out.println("I'm sending it back...");
-                out.writeUTF(line); // отсылаем клиенту обратно ту самую строку текста.
-                out.flush(); // заставляем поток закончить передачу данных.
+//                out.writeUTF(line); // отсылаем клиенту обратно ту самую строку текста.
+//                out.flush(); // заставляем поток закончить передачу данных.
 //                System.out.println("Waiting for the next line...");
 //                System.out.println();
             }
